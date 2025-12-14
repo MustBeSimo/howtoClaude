@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Work with Claude</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #D4725E;
+            --primary-dark: #B85A48;
+            --secondary: #E8AE9F;
+            --accent: #9B6B5C;
+            --cream: #F5EFE7;
+            --warm-white: #FDFBF7;
+            --dark: #2C2420;
+            --charcoal: #463F3A;
+            --sand: #E8DCC8;
+            --soft-blue: #e8f4f8;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(15px, -15px); }
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cream);
+            color: var(--dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        header {
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .ornament {
+            position: absolute;
+            top: -40px;
+            left: -40px;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(212, 114, 94, 0.12), rgba(232, 174, 159, 0.08));
+            border-radius: 50%;
+            filter: blur(50px);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        h1 {
+            font-family: 'Fraunces', serif;
+            font-size: 110px;
+            font-weight: 300;
+            letter-spacing: -2.5px;
+            color: var(--dark);
+            margin-bottom: 20px;
+            line-height: 1.1;
+            animation: fadeInUp 0.8s ease-out;
+            width: 100%;
+        }
+
+        h1 em {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--dark);
+        }
+
+        h1 strong {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: var(--charcoal);
+            font-weight: 400;
+            font-style: normal;
+            opacity: 0.8;
+            animation: fadeIn 1s ease-out 0.3s both;
+            line-height: 1.6;
+            white-space: nowrap;
+        }
+
+        .badges {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+            animation: fadeIn 1.2s ease-out 0.5s both;
+        }
+
+        .badge {
+            background: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .badge.outline {
+            background: transparent;
+            border: 1.5px solid var(--primary);
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        section {
+            margin-bottom: 72px;
+            animation: fadeInUp 0.7s ease-out both;
+            animation-delay: calc(var(--delay) * 0.12s);
+        }
+
+        h2 {
+            font-family: 'Fraunces', serif;
+            font-size: 48px;
+            font-weight: 600;
+            margin-bottom: 36px;
+            color: var(--dark);
+            letter-spacing: -1.5px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 4px;
+            height: 36px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--dark);
+            letter-spacing: -0.5px;
+        }
+
+        h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--primary-dark);
+        }
+
+        p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: var(--charcoal);
+            margin-bottom: 20px;
+        }
+
+        em {
+            font-style: italic;
+            color: var(--primary-dark);
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .card {
+            background: var(--warm-white);
+            border-radius: 20px;
+            padding: 36px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 16px rgba(44, 36, 32, 0.04);
+            border: 1px solid rgba(212, 114, 94, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(44, 36, 32, 0.08);
+            border-color: rgba(212, 114, 94, 0.15);
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, rgba(212, 114, 94, 0.06), rgba(232, 174, 159, 0.04));
+            border-left: 4px solid var(--primary);
+            padding: 28px 32px;
+            border-radius: 12px;
+            margin: 28px 0;
+        }
+
+        .highlight.blue {
+            background: linear-gradient(135deg, rgba(155, 107, 92, 0.06), rgba(212, 114, 94, 0.04));
+            border-left-color: var(--accent);
+        }
+
+        .pills {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 24px 0;
+        }
+
+        .pill {
+            background: linear-gradient(135deg, rgba(232, 244, 248, 0.4), rgba(212, 114, 94, 0.08));
+            color: var(--primary-dark);
+            padding: 10px 24px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid rgba(212, 114, 94, 0.15);
+            transition: all 0.25s ease;
+        }
+
+        .pill:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .code {
+            background: linear-gradient(135deg, rgba(232, 244, 248, 0.4), rgba(44, 36, 32, 0.04));
+            border: 1px solid rgba(212, 114, 94, 0.15);
+            padding: 20px 28px;
+            border-radius: 12px;
+            font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+            font-size: 15px;
+            color: var(--charcoal);
+            margin: 20px 0;
+            position: relative;
+            padding-left: 48px;
+        }
+
+        .code::before {
+            content: '→';
+            position: absolute;
+            left: 20px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+            margin: 40px 0;
+        }
+
+        .feature {
+            background: var(--warm-white);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid rgba(212, 114, 94, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .feature:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(44, 36, 32, 0.1);
+            border-color: rgba(212, 114, 94, 0.2);
+        }
+
+        .icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-family: 'Fraunces', serif;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--dark);
+            letter-spacing: -0.3px;
+        }
+
+        .feature-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--charcoal);
+            opacity: 0.85;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--sand);
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .tip-box {
+            background: var(--warm-white);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(212, 114, 94, 0.08);
+        }
+
+        .tip-number {
+            font-family: 'Fraunces', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0;
+            display: inline;
+            margin-right: 12px;
+        }
+
+        .tip-title {
+            font-family: 'Fraunces', serif;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--dark);
+            display: inline;
+        }
+
+        .tip-description {
+            font-size: 16px;
+            font-style: italic;
+            color: var(--charcoal);
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, rgba(232, 244, 248, 0.3), rgba(212, 114, 94, 0.04));
+            padding: 20px 24px;
+            border-radius: 10px;
+            margin-top: 16px;
+        }
+
+        .example-label {
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .example-text {
+            font-size: 15px;
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        .bad-example {
+            background: linear-gradient(135deg, rgba(155, 107, 92, 0.04), rgba(212, 114, 94, 0.02));
+        }
+
+        .bad-example .example-label {
+            color: var(--accent);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            padding-left: 32px;
+            margin-bottom: 16px;
+            position: relative;
+            line-height: 1.8;
+            color: var(--charcoal);
+        }
+
+        li::before {
+            content: '•';
+            position: absolute;
+            left: 12px;
+            color: var(--primary);
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 0 40px;
+            margin-top: 80px;
+            border-top: 1px solid rgba(212, 114, 94, 0.12);
+        }
+
+        .footer-text {
+            font-size: 15px;
+            color: var(--charcoal);
+            opacity: 0.6;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .footer-brand {
+            font-family: 'Fraunces', serif;
+            font-size: 18px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 50px 24px;
+            }
+
+            h1 {
+                font-size: 48px;
+            }
+
+            h2 {
+                font-size: 36px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="ornament"></div>
+            <h1>How to <em>Work</em><br>with <strong>Claude</strong></h1>
+            <p class="subtitle">The complete guide to maximizing productivity with Claude Code & Claude AI</p>
+            <div class="badges">
+                <span class="badge">Claude Sonnet 4.5</span>
+                <span class="badge outline">December 2025</span>
+            </div>
+        </header>
+
+        <section style="--delay: 1">
+            <h2>🚀 Getting Started</h2>
+            
+            <div class="card">
+                <h3>Project Initialization</h3>
+                <p>When starting a new project, always use the <strong>"/init"</strong> command. This command creates a "Claude.md" document containing your project documentation for easy reference.</p>
+                <div class="code">/init</div>
+            </div>
+
+            <div class="card">
+                <h3>Working Effectively</h3>
+                <p>After initializing your project, always ask Claude Code to <em>explain the project thoroughly</em>. Request details about each component, their functionalities, and how they interconnect with other parts of your project.</p>
+            </div>
+        </section>
+
+        <section style="--delay: 2">
+            <h2>🎯 Working with <em>Code</em></h2>
+            
+            <div class="highlight">
+                <h3>For Complex Changes</h3>
+                <p>If you're planning a <strong>major change</strong>, such as large-scale refactoring or adding complex new functionality, always instruct Claude Code to outline a plan before implementing any changes. Encourage deeper thinking by using phrases such as:</p>
+                <div class="pills">
+                    <span class="pill">Think hard</span>
+                    <span class="pill">Think deep</span>
+                    <span class="pill">Think longer</span>
+                </div>
+                <p style="margin-top: 24px;">After reviewing Claude's proposed plan, if you agree, proceed directly with the changes. If not, request revisions to the plan.</p>
+            </div>
+
+            <div class="highlight blue">
+                <h3>For Smaller Changes</h3>
+                <p>For smaller changes, such as <em>simple, single-file updates</em> or straightforward features, clearly specify the exact file you want to modify. For example:</p>
+                <div class="code">Claude, can you increase the size of the chat input in the file "user/page.tsx"?</div>
+                <div class="code">Claude, can you add error handling to "data_processing.py"?</div>
+                <div class="code">Claude, please refactor the `calculate_totals` function in "invoice.py"</div>
+            </div>
+
+            <div class="card">
+                <span class="tag">Best Practices</span>
+                <h3>Other Best Practices</h3>
+                <ul>
+                    <li>Regularly use the <strong>/compact</strong> command during development. This helps Claude Code remain efficient and reduces the risk of confusion in long-term projects.</li>
+                    <li>Always be <strong>explicit about which files</strong> you intend to change and clearly state their relationships to other components.</li>
+                    <li>Frequently run tests. Claude Code excels at validating new functionality through thorough testing, ensuring reliability and accuracy.</li>
+                    <li>Periodically ask Claude Code to <em>review the entire project</em>, assessing logic consistency and identifying any redundant or inefficient code.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section style="--delay: 3">
+            <h2>💡 Advanced <em>Prompting</em> Techniques</h2>
+            
+            <div class="tip-box">
+                <div class="tip-number">1.</div>
+                <div class="tip-title">Be Painfully Specific</div>
+                <div class="tip-description">Say exactly what you want (format, tone, length, audience).</div>
+                
+                <div class="example-box">
+                    <div class="example-label">✓ Good Prompt:</div>
+                    <div class="example-text">"Write a 300-word blog post for tech-savvy millennials in a casual, humorous tone about the benefits of mechanical keyboards, using bullet points for key features."</div>
+                </div>
+                
+                <div class="example-box bad-example">
+                    <div class="example-label">✗ Bad Prompt:</div>
+                    <div class="example-text">"Write something about keyboards."</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-number">2.</div>
+                <div class="tip-title">Tell It Why You Want It</div>
+                <div class="tip-description">A one-line reason improves results fast.</div>
+                
+                <div class="example-box">
+                    <div class="example-label">✓ Good Prompt:</div>
+                    <div class="example-text">"Summarize this legal document. This is for a non-lawyer executive to understand the key risks."</div>
+                </div>
+                
+                <div class="example-box bad-example">
+                    <div class="example-label">✗ Bad Prompt:</div>
+                    <div class="example-text">"Summarize this legal document."</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-number">3.</div>
+                <div class="tip-title">Your Examples Are The Truth</div>
+                <div class="tip-description">If you show a sample, Claude copies it.</div>
+                
+                <div class="example-box">
+                    <div class="example-label">✓ Good Example:</div>
+                    <div class="example-text">"Here is a well-formatted customer service response. [Sample] Now write a response to this new query in the same style."</div>
+                </div>
+                
+                <div class="example-box bad-example">
+                    <div class="example-label">✗ Bad Example:</div>
+                    <div class="example-text">"Write a response like this one: [A poorly written, rude email]."</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-number">4.</div>
+                <div class="tip-title">Big Projects? Work in Small Checkpoints</div>
+                <div class="tip-description">Force "step-by-step progress," not "do everything at once."</div>
+                
+                <div class="example-box">
+                    <div class="example-label">✓ Good Strategy:</div>
+                    <div class="example-text">"First, outline the main sections of the report. [Claude provides outline]. Now, write the introduction based on that outline."</div>
+                </div>
+                
+                <div class="example-box bad-example">
+                    <div class="example-label">✗ Bad Strategy:</div>
+                    <div class="example-text">"Write a complete 50-page report on climate change."</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-number">5.</div>
+                <div class="tip-title">If You Use an Agent Workflow, Say So</div>
+                <div class="tip-description">Tell it whether context will be compacted / saved to files.</div>
+                
+                <div class="example-box">
+                    <div class="example-label">✓ Good Prompt:</div>
+                    <div class="example-text">"You are an agent in a multi-turn workflow. At the end of each turn, summarize your progress and save the current state to a file named 'state.json'."</div>
+                </div>
+                
+                <div class="example-box bad-example">
+                    <div class="example-label">✗ Bad Prompt:</div>
+                    <div class="example-text">"Just do the task."</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-number">6.</div>
+                <div class="tip-title">Want Action, Not Advice? Say "Do It"</div>
+                <div class="tip-description">If you want edits/implementation, explicitly request that behavior.</div>
+                
+                <div class="example-box">
+                    <div class="example-label">✓ Good Prompt:</div>
+                    <div class="example-text">"Here is some code. Refactor it to improve performance and readability. Return only the refactored code."</div>
+                </div>
+                
+                <div class="example-box bad-example">
+                    <div class="example-label">✗ Bad Prompt:</div>
+                    <div class="example-text">"What do you think of this code?"</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-number">7.</div>
+                <div class="tip-title">Control Formatting by Saying What to Do</div>
+                <div class="tip-description">Instead of "don't use markdown," say "write 3 short paragraphs" or "return JSON."</div>
+                
+                <div class="example-box">
+                    <div class="example-label">✓ Good Prompt:</div>
+                    <div class="example-text">"Output the final answer as a JSON object with keys 'summary' and 'key_points'."</div>
+                </div>
+                
+                <div class="example-box bad-example">
+                    <div class="example-label">✗ Bad Prompt:</div>
+                    <div class="example-text">"Don't use any special formatting or markdown."</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-number">8.</div>
+                <div class="tip-title">Use Simple "Labels" (XML tags) to Steer Behavior</div>
+                <div class="tip-description">Recommend lightweight tags to set defaults like "be proactive" vs "be cautious."</div>
+                
+                <div class="example-box">
+                    <div class="example-label">✓ Good Prompt:</div>
+                    <div class="example-text">"You are a helpful assistant. &lt;persona&gt;Be proactive and offer suggestions beyond the user's direct request.&lt;/persona&gt;"</div>
+                </div>
+                
+                <div class="example-box bad-example">
+                    <div class="example-label">✗ Bad Prompt:</div>
+                    <div class="example-text">"Be proactive."</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-number">9.</div>
+                <div class="tip-title">If 'Thinking' Is Off, Avoid the Word 'Think'</div>
+                <div class="tip-description">Claude models can be weirdly sensitive to "think"—use "consider / evaluate" instead.</div>
+                
+                <div class="example-box">
+                    <div class="example-label">✓ Good Prompt:</div>
+                    <div class="example-text">"Before answering, please consider the user's request and evaluate the best approach."</div>
+                </div>
+                
+                <div class="example-box bad-example">
+                    <div class="example-label">✗ Bad Prompt:</div>
+                    <div class="example-text">"Think about the user's request before answering."</div>
+                </div>
+            </div>
+        </section>
+
+        <section style="--delay: 4">
+            <h2>⚡ Essential <em>Claude</em> Features</h2>
+            
+            <div class="grid">
+                <div class="feature">
+                    <div class="icon">📚</div>
+                    <div class="feature-title">Skills System</div>
+                    <div class="feature-text">Specialized knowledge folders (docx, pptx, xlsx, pdf, frontend-design) that dramatically improve output quality. Let Claude read relevant SKILL.md files before creating documents for professional-grade results.</div>
+                </div>
+
+                <div class="feature">
+                    <div class="icon">🔍</div>
+                    <div class="feature-title">Web Search & Tools</div>
+                    <div class="feature-text">Claude can search the web, fetch URLs, access Google Drive, and use integrated tools for research and current information. Essential for staying up-to-date and accessing your company resources.</div>
+                </div>
+
+                <div class="feature">
+                    <div class="icon">🧠</div>
+                    <div class="feature-title">Memory System</div>
+                    <div class="feature-text">Claude remembers context from past conversations, making every interaction feel informed by shared history. Your ongoing projects benefit from continuity across sessions.</div>
+                </div>
+
+                <div class="feature">
+                    <div class="icon">📄</div>
+                    <div class="feature-title">File Creation</div>
+                    <div class="feature-text">Create actual files—presentations, documents, spreadsheets, PDFs—not just content previews. Claude generates professional deliverables you can immediately download or share.</div>
+                </div>
+
+                <div class="feature">
+                    <div class="icon">🎯</div>
+                    <div class="feature-title">Strategic Planning</div>
+                    <div class="feature-text">For complex multi-tool tasks, Claude develops comprehensive research plans before executing. Particularly valuable for transformation work requiring multiple data sources.</div>
+                </div>
+
+                <div class="feature">
+                    <div class="icon">💾</div>
+                    <div class="feature-title">200K Context Window</div>
+                    <div class="feature-text">With a 200K token context window, Claude can handle entire codebases, multiple documents, or extensive conversations without losing context.</div>
+                </div>
+            </div>
+        </section>
+
+        <section style="--delay: 5">
+            <h2>✨ Best <em>Practices</em></h2>
+            
+            <div class="card">
+                <span class="tag">Leverage Skills</span>
+                <h3>Read Skills Before Creating</h3>
+                <p>Before creating documents, presentations, or complex interfaces, <strong>explicitly ask Claude to read the relevant skill documentation</strong>. This ensures you get the highest quality, most professional outputs.</p>
+                <div class="code">Please read the pptx skill, then create a presentation about our Q3 results</div>
+                <div class="code">Read the docx skill and create a project proposal</div>
+            </div>
+
+            <div class="card">
+                <span class="tag">Organization</span>
+                <h3>Use Projects for Context</h3>
+                <p>For ongoing work, use <em>Claude Projects</em> to maintain context, custom instructions, and relevant files. This creates a dedicated workspace with persistent memory and knowledge.</p>
+            </div>
+        </section>
+
+        <section style="--delay: 6">
+            <h2>🎨 Getting the Best <em>Output</em></h2>
+            
+            <div class="highlight">
+                <h3>For Documents & Presentations</h3>
+                <p>When creating professional documents, <strong>always reference the skills system:</strong></p>
+                <div class="code">"Read the docx skill and create a project proposal"</div>
+                <div class="code">"Use the pptx skill to make a 10-slide investor deck"</div>
+                <p style="margin-top: 24px;">This ensures Claude uses battle-tested best practices for formatting, structure, and visual design.</p>
+            </div>
+
+            <div class="highlight blue">
+                <h3>For Research & Analysis</h3>
+                <p><em>Combine tools strategically:</em></p>
+                <ul>
+                    <li>Use <strong>web_search</strong> for current information and industry trends</li>
+                    <li>Use <strong>web_fetch</strong> to read complete articles and reports</li>
+                    <li>Use <strong>Google Drive</strong> or internal tools for company-specific data</li>
+                    <li>Ask Claude to synthesize findings from multiple sources</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer>
+            <p class="footer-text">This guide reflects Claude's capabilities as of December 2025</p>
+            <p class="footer-brand">Made with Claude Sonnet 4.5 by Simone Leonelli</p>
+        </footer>
+    </div>
+</body>
+</html>
