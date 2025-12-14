@@ -442,19 +442,239 @@
 
         @media (max-width: 768px) {
             .container {
-                padding: 50px 24px;
+                padding: 40px 20px;
+                max-width: 100%;
             }
 
             h1 {
-                font-size: 48px;
+                font-size: 36px;
+                margin-bottom: 16px;
             }
 
             h2 {
-                font-size: 36px;
+                font-size: 28px;
+                margin-bottom: 24px;
+            }
+
+            h3 {
+                font-size: 22px;
+            }
+
+            h4 {
+                font-size: 16px;
+            }
+
+            p {
+                font-size: 15px;
+                line-height: 1.6;
+            }
+
+            .subtitle {
+                font-size: 16px;
+                white-space: normal;
+            }
+
+            .badges {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .badge {
+                padding: 6px 16px;
+                font-size: 12px;
+            }
+
+            .card {
+                padding: 24px;
+                margin-bottom: 20px;
             }
 
             .grid {
                 grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .feature {
+                padding: 24px;
+            }
+
+            .tip-box {
+                padding: 24px;
+                margin-bottom: 20px;
+            }
+
+            .tip-number {
+                font-size: 28px;
+            }
+
+            .tip-title {
+                font-size: 20px;
+            }
+
+            .code {
+                padding: 16px 20px;
+                padding-left: 40px;
+                font-size: 13px;
+            }
+
+            .highlight {
+                padding: 20px 24px;
+                margin: 20px 0;
+            }
+
+            .pills {
+                gap: 8px;
+            }
+
+            .pill {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+
+            li {
+                padding-left: 24px;
+                margin-bottom: 12px;
+                font-size: 15px;
+            }
+
+            section {
+                margin-bottom: 48px;
+            }
+
+            header {
+                margin-bottom: 48px;
+            }
+
+            .ornament {
+                width: 150px;
+                height: 150px;
+                top: -20px;
+                left: -20px;
+            }
+
+            footer {
+                padding: 40px 0 20px;
+                margin-top: 60px;
+            }
+
+            .footer-text {
+                font-size: 13px;
+            }
+
+            .footer-brand {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 24px 16px;
+            }
+
+            h1 {
+                font-size: 28px;
+                line-height: 1.2;
+            }
+
+            h2 {
+                font-size: 22px;
+                padding-left: 12px;
+            }
+
+            h2::before {
+                width: 3px;
+                height: 28px;
+            }
+
+            h3 {
+                font-size: 18px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+            }
+
+            .badge {
+                padding: 5px 12px;
+                font-size: 11px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .feature {
+                padding: 20px;
+            }
+
+            .icon {
+                width: 48px;
+                height: 48px;
+                font-size: 24px;
+            }
+
+            .feature-title {
+                font-size: 18px;
+            }
+
+            .feature-text {
+                font-size: 14px;
+            }
+
+            .tip-box {
+                padding: 20px;
+            }
+
+            .tip-number {
+                font-size: 24px;
+            }
+
+            .tip-title {
+                font-size: 18px;
+            }
+
+            .tip-description {
+                font-size: 14px;
+            }
+
+            .example-text {
+                font-size: 13px;
+            }
+
+            .code {
+                padding: 14px 16px;
+                padding-left: 36px;
+                font-size: 12px;
+            }
+
+            .highlight {
+                padding: 16px 20px;
+                margin: 16px 0;
+            }
+
+            li {
+                padding-left: 20px;
+                font-size: 14px;
+            }
+
+            li::before {
+                left: 8px;
+            }
+
+            header {
+                margin-bottom: 32px;
+            }
+
+            section {
+                margin-bottom: 36px;
+            }
+
+            .ornament {
+                display: none;
             }
         }
     </style>
