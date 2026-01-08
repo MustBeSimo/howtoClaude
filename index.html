@@ -769,6 +769,11 @@
                                 primary benefit is currency: unlike a static RAG index that can become stale, this
                                 agentic search method ensures Claude is always working with the absolute latest version
                                 of the code.</p>
+                            <p style="margin-top: 16px;"><em>Trade-off:</em> Agentic search trades token efficiency for
+                                currency and security. While it avoids third-party indexing liabilities, it can consume
+                                significantly more context as it performs sequential roundtrips. For massive codebases,
+                                you can add <strong>semantic search</strong> via MCP vector database plugins like
+                                Milvus.</p>
                         </div>
 
                         <div class="example-box"
@@ -910,13 +915,14 @@
 
                         <div class="highlight blue" style="margin-top: 24px;">
                             <h4>Automated Convenience, Manual Control</h4>
-                            <p>While Claude will automatically compact the session when it gets too full (around 95%
-                                capacity), skilled users trigger this manually after completing a major task. This
-                                creates a concise summary of the session so far, <em>framed as a handoff to another
-                                    developer</em>.</p>
-                            <p style="margin-top: 16px;">This proactively "saves game" at a clean break point, ensuring
-                                the AI focuses only on what matters for the next task instead of drowning in the noise
-                                of previous attempts.</p>
+                            <p>While Claude will automatically compact the session when it gets full, recent analysis
+                                suggests the threshold is often lower than 95% (closer to 75-85%) to preserve "working
+                                memory" for reasoning. <strong>Compaction is a lossy compression</strong>—after 2-3
+                                cycles, nuanced details can be lost in a "telephone game" effect.</p>
+                            <p style="margin-top: 16px;">The <strong>"Document & Clear"</strong> pattern is a power-user
+                                best practice: have Claude write its progress to a <code>progress.md</code> file, then
+                                run <code>/clear</code> and start fresh using that file as the new baseline. This
+                                provides a lossless checkpoint rather than trusting lossy automatic summarization.</p>
                         </div>
 
                         <div class="pills" style="margin-top: 24px;">
@@ -1270,9 +1276,10 @@
 
                 <div class="feature">
                     <div class="icon">💾</div>
-                    <div class="feature-title">200K Context Window</div>
-                    <div class="feature-text">With a 200K token context window, Claude can handle entire codebases,
-                        multiple documents, or extensive conversations without losing context.</div>
+                    <div class="feature-title">Up to 1M Context Window</div>
+                    <div class="feature-text">Standard plans offer 200K tokens, while Enterprise plans scale to 500K.
+                        API users can access up to 1M tokens in beta—allowing you to load entire codebases or maintain
+                        coherence across hundreds of tool calls.</div>
                 </div>
             </div>
         </section>
@@ -1336,12 +1343,36 @@
                 style="margin-top: 24px; background: linear-gradient(135deg, rgba(44, 36, 32, 0.03), rgba(212, 114, 94, 0.03));">
                 <span class="tag">Advanced Control</span>
                 <h3>Hyper-Control with Hooks</h3>
-                <p>For ultimate control, define <strong>Hooks</strong>—scripts that run at specific lifecycle events
-                    (like <code>PreToolUse</code>) to block actions or enforce safety.</p>
-                <div class="code" style="font-size: 13px;">
+                <p>Hooks aren't just for blocking <code>rm -rf</code>. They are the primary mechanism for
+                    <strong>enterprise governance</strong> and workflow automation. You can trigger scripts at lifecycle
+                    events like <code>PreToolUse</code>, <code>PostToolUse</code>, or <code>OnSessionStart</code>.
+                </p>
+
+                <div class="grid"
+                    style="margin-top: 20px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                    <div style="font-size: 14px;">
+                        <strong>Safety & Governance:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>Enforce read-only access to specific directories</li>
+                            <li>Require human confirmation for production config changes</li>
+                            <li>Log all tool invocations for compliance audit trails</li>
+                        </ul>
+                    </div>
+                    <div style="font-size: 14px;">
+                        <strong>Workflow Automation:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>Auto-run linters/tests after every code modification</li>
+                            <li>Inject team-specific style guides into the context</li>
+                            <li>Validate outputs against schemas before execution</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="code" style="font-size: 13px; margin-top: 20px;">
                     # .claude/hooks/pre-tool-use.sh<br>
-                    if [[ "$TOOL_NAME" == "bash" && "$TOOL_INPUT" == *"rm -rf"* ]]; then<br>
-                    &nbsp;&nbsp;echo "⚠️ Blocked dangerous deletion"<br>
+                    # Prevent accidental changes to production env files<br>
+                    if [[ "$TOOL_INPUT" == *".env.production"* && "$TOOL_NAME" == "write_file" ]]; then<br>
+                    &nbsp;&nbsp;echo "⚠️ Production config modification blocked by hook"<br>
                     &nbsp;&nbsp;exit 1<br>
                     fi
                 </div>
@@ -1356,12 +1387,14 @@
             <div class="grid">
                 <div class="card" style="margin-bottom: 0;">
                     <span class="tag">Architecture</span>
-                    <h3>The Mental Model</h3>
-                    <p>Think of <strong>MCP</strong> (Model Context Protocol) as giving Claude <em>hands</em> (tools to
-                        touch your data), and <strong>Subagents</strong> as giving it <em>staff</em>.</p>
-                    <p style="margin-top: 16px;">Instead of one giant prompt, create specialized agents—like a "QA
-                        Tester" or "Docs Writer"—that have their own <strong>isolated memory</strong> to prevent context
-                        pollution.</p>
+                    <h3>The Mental Model: Isolation</h3>
+                    <p>Subagents aren't just for delegation; they solve <strong>context pollution</strong>. By spawning
+                        a specialist with a fresh context window, you prevent irrelevant exploration noise from drowning
+                        out the signal in your main session.</p>
+                    <p style="margin-top: 16px;">This architectural pattern ensures <strong>isolated memory</strong> and
+                        <strong>single-purpose focus</strong>. When a subagent finishes, it returns only the result—not
+                        thousands of tokens of trial and error.
+                    </p>
                 </div>
 
                 <div class="card" style="margin-bottom: 0;">
@@ -1369,11 +1402,10 @@
                     <h3>Creating Subagents</h3>
                     <p>Two ways to spawn your team:</p>
                     <ul style="margin-top: 16px;">
-                        <li><strong>Interactive:</strong> Type <code>/agents</code> in the CLI and let Claude interview
-                            you to design the perfect specialist.</li>
-                        <li><strong>Declarative:</strong> Create a markdown file in
-                            <code>.claude/agents/my-agent.md</code> to version-control your team.
-                        </li>
+                        <li><strong>Interactive:</strong> Type <code>/agents</code> and let Claude design a specialist
+                            for you.</li>
+                        <li><strong>Declarative:</strong> Version-control your team via <code>.claude/agents/*.md</code>
+                            files, defining specific tools and guidelines.</li>
                     </ul>
                 </div>
             </div>
