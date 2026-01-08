@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How to Work with Claude</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -30,6 +33,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -37,13 +41,25 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(15px, -15px); }
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(15px, -15px);
+            }
         }
 
         body {
@@ -679,6 +695,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -686,43 +703,259 @@
             <h1>How to <em>Work</em><br>with <strong>Claude</strong></h1>
             <p class="subtitle">The complete guide to maximizing productivity with Claude Code & Claude AI</p>
             <div class="badges">
-                <span class="badge">Claude Sonnet 4.5</span>
-                <span class="badge outline">December 2025</span>
+                <span class="badge">Claude 4.5</span>
+                <span class="badge outline">January 2026</span>
             </div>
         </header>
 
         <section style="--delay: 1">
+            <h2>🌟 Introduction: Beyond the Hype</h2>
+
+            <div class="highlight">
+                <p>AI coding assistants are everywhere. It's easy to view them as a new kind of autocomplete—powerful,
+                    yes, but fundamentally just a tool for writing code faster. We ask for a function, it generates one.
+                    We ask it to fix a bug, it suggests a change.</p>
+                <p style="margin-top: 20px;"><strong>But that's like saying a calculator is just for addition.</strong>
+                </p>
+                <p style="margin-top: 20px;">A recent deep dive from Anthropic's team shows the reality is far more
+                    interesting. Claude Code operates on some <em>surprisingly counter-intuitive principles</em>. It's
+                    not just about writing code; it's about thinking and collaborating like an expert developer.</p>
+            </div>
+        </section>
+
+        <section style="--delay: 2">
             <h2>🚀 Getting Started</h2>
-            
+
             <div class="card">
                 <h3>Project Initialization</h3>
-                <p>When starting a new project, always use the <strong>"/init"</strong> command. This command creates a "Claude.md" document containing your project documentation for easy reference.</p>
+                <p>When starting a new project, always use the <strong>"/init"</strong> command. This command creates a
+                    "CLAUDE.md" document containing your project documentation for easy reference.</p>
                 <div class="code">/init</div>
             </div>
 
             <div class="card">
                 <h3>Working Effectively</h3>
-                <p>After initializing your project, always ask Claude Code to <em>explain the project thoroughly</em>. Request details about each component, their functionalities, and how they interconnect with other parts of your project.</p>
+                <p>After initializing your project, always ask Claude Code to <em>explain the project thoroughly</em>.
+                    Request details about each component, their functionalities, and how they interconnect with other
+                    parts of your project.</p>
             </div>
         </section>
 
-        <section style="--delay: 2">
+        <section style="--delay: 3">
+            <h2>🔍 5 Surprising Truths About Claude Code</h2>
+            <p style="font-size: 18px; color: var(--charcoal); margin-bottom: 40px; font-style: italic;">These insights
+                will change how you work with AI coding assistants</p>
+
+            <div class="card">
+                <div style="display: flex; align-items: start; gap: 20px;">
+                    <div class="tip-number" style="font-size: 64px; margin: 0;">1</div>
+                    <div style="flex: 1;">
+                        <h3>It Doesn't Index Your Codebase (And That's a Good Thing)</h3>
+                        <p>The common assumption about AI coding tools is that to understand a large project, they must
+                            first index and embed the entire codebase using Retrieval-Augmented Generation (RAG).
+                            <strong>Claude Code does not do this at all.</strong>
+                        </p>
+                        <p>Instead, it relies on <em>"agentic search."</em> It explores the codebase using the same
+                            command-line tools a human developer would, like <code>grep</code>, <code>find</code>, and
+                            <code>glob</code>. The AI can run a search, analyze the results, and decide to run another,
+                            more refined search, dynamically building its understanding of the project's structure and
+                            logic.
+                        </p>
+
+                        <div class="highlight blue" style="margin-top: 24px;">
+                            <h4>Why This Matters</h4>
+                            <p>Rather than working from a pre-processed, static snapshot, Claude Code learns the
+                                codebase on the fly, <strong>much like a new engineer joining your team</strong>. The
+                                primary benefit is currency: unlike a static RAG index that can become stale, this
+                                agentic search method ensures Claude is always working with the absolute latest version
+                                of the code.</p>
+                        </div>
+
+                        <div class="example-box"
+                            style="margin-top: 20px; background: linear-gradient(135deg, rgba(232, 244, 248, 0.5), rgba(212, 114, 94, 0.08)); border-left: 3px solid var(--primary); padding: 16px 20px;">
+                            <div style="font-size: 14px; color: var(--charcoal); font-style: italic;">"If you're going
+                                to build a coding agent or a coding tool a year ago, you'd probably have ideas like...
+                                index the whole codebase and embed it and do this fancy like kind of RAG retrieval
+                                thing. That is not how Claude Code works. We don't do any sort of indexing. Instead,
+                                Claude kind of explores and understands the codebase... through agentic search."</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div style="display: flex; align-items: start; gap: 20px;">
+                    <div class="tip-number" style="font-size: 64px; margin: 0;">2</div>
+                    <div style="flex: 1;">
+                        <h3>It's Not Just a Coder; It's a Terminal Whiz</h3>
+                        <p>The most effective mental model for Claude Code isn't a code generator; it's <strong>an
+                                expert coworker who is a master of the command line</strong>.</p>
+                        <p>Think about that senior engineer who, when asked for help, would solve complex bugs with a
+                            flurry of "crazy bash commands" and quick edits. This is the exact mental model Anthropic
+                            built into Claude Code: a tool that embodies the command-line mastery of a seasoned expert.
+                        </p>
+
+                        <div class="highlight" style="margin-top: 24px;">
+                            <h4>Beyond Application Code</h4>
+                            <p>This means its expertise extends far beyond writing application code. It excels at using
+                                command-line interface (CLI) tools like:</p>
+                            <div class="pills" style="margin: 16px 0;">
+                                <span class="pill">Git & Version Control</span>
+                                <span class="pill">Docker & Containers</span>
+                                <span class="pill">BigQuery & Databases</span>
+                                <span class="pill">CI/CD Pipelines</span>
+                                <span class="pill">Package Managers</span>
+                            </div>
+                        </div>
+
+                        <div class="example-box" style="margin-top: 20px;">
+                            <div class="example-label">Example Use Case:</div>
+                            <div class="example-text">"Claude, I'm stuck in a rebase conflict with multiple commits. Can
+                                you help me resolve this?" → Claude generates and executes the correct Git commands for
+                                you.</div>
+                        </div>
+
+                        <p style="margin-top: 20px;"><em>This reframes the tool from a pair programmer that helps with
+                                application logic to a true DevOps partner that can help manage the entire development
+                                environment.</em></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div style="display: flex; align-items: start; gap: 20px;">
+                    <div class="tip-number" style="font-size: 64px; margin: 0;">3</div>
+                    <div style="flex: 1;">
+                        <h3>The Best Time to Use It Might Be Before You Write Code</h3>
+                        <p>One of the most underrated features of Claude Code is its ability to act as a
+                            <strong>"thought partner"</strong> during the planning and discovery phase of a project.
+                        </p>
+                        <p>Instead of immediately diving into implementation, you can ask Claude to first investigate a
+                            feature idea. It can search the existing codebase to identify relevant patterns, find where
+                            similar logic is implemented, and propose several different implementation plans—all before
+                            writing a single line of new code.</p>
+
+                        <div class="highlight blue" style="margin-top: 24px;">
+                            <h4>Strategic Discovery Phase</h4>
+                            <p>This "thought partner" phase is analogous to running a technical spike or a pre-mortem
+                                design review. It <strong>de-risks the entire feature development process</strong> by
+                                allowing you to validate an approach and compare strategies before committing valuable
+                                engineering resources.</p>
+                        </div>
+
+                        <div class="example-box"
+                            style="margin-top: 20px; background: linear-gradient(135deg, rgba(232, 244, 248, 0.5), rgba(212, 114, 94, 0.08)); border-left: 3px solid var(--primary); padding: 16px 20px;">
+                            <div style="font-size: 14px; color: var(--charcoal); font-style: italic;">"I'll open up
+                                Claude and I'll say, 'Hey Claude, I'm thinking about implementing this feature, can you
+                                just search around and figure out how we would do it and maybe report back with two or
+                                three different options. Don't start working.'"</div>
+                        </div>
+
+                        <div class="code" style="margin-top: 20px;">Claude, explore our codebase and propose 3 different
+                            approaches for implementing user authentication with OAuth. Don't write any code yet, just
+                            analyze and compare options.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div style="display: flex; align-items: start; gap: 20px;">
+                    <div class="tip-number" style="font-size: 64px; margin: 0;">4</div>
+                    <div style="flex: 1;">
+                        <h3>A Simple Markdown File Acts as Its Shared Memory</h3>
+                        <p>AI models are inherently stateless; they don't have long-term memory between sessions. Claude
+                            Code addresses this with a deceptively simple and powerful mechanism: <strong>a Markdown
+                                file named <code>claude.md</code></strong>.</p>
+                        <p>When Claude Code starts in a directory, it automatically finds any <code>claude.md</code>
+                            file and loads it into context. This file serves as a set of standing instructions for the
+                            AI.</p>
+
+                        <div class="highlight" style="margin-top: 24px;">
+                            <h4>What to Include in claude.md</h4>
+                            <ul style="margin-top: 12px;">
+                                <li>Instructions on how to run unit tests</li>
+                                <li>Overview of the project's layout and key modules</li>
+                                <li>Your team's specific coding style guide</li>
+                                <li>Common commands and workflows</li>
+                                <li>Architecture decisions and patterns</li>
+                            </ul>
+                        </div>
+
+                        <div class="example-box" style="margin-top: 20px;">
+                            <div class="example-label">💡 Team Collaboration Benefit:</div>
+                            <div class="example-text">By checking the <code>claude.md</code> file into your project's
+                                version control (e.g., Git), the entire team can share the same set of instructions with
+                                Claude. This ensures that every developer—and the AI assisting them—is working from the
+                                same context, promoting consistency across the board.</div>
+                        </div>
+
+                        <div class="code" style="margin-top: 20px;"># claude.md example<br>## Testing<br>Run tests with:
+                            npm test<br>Run e2e tests with: npm run test:e2e<br><br>## Architecture<br>This is a Next.js
+                            app with API routes in /pages/api<br>Database layer uses Prisma ORM</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div style="display: flex; align-items: start; gap: 20px;">
+                    <div class="tip-number" style="font-size: 64px; margin: 0;">5</div>
+                    <div style="flex: 1;">
+                        <h3>It Has a Clever Trick for Long Conversations</h3>
+                        <p>Anyone who has used a large language model for a complex task has run into the
+                            <strong>"context window" limit</strong>. As a conversation gets longer, the model eventually
+                            runs out of memory and has to reset.
+                        </p>
+                        <p>Claude Code handles this with <strong>automatic compaction</strong>, but the real power lies
+                            in taking control with <strong>the <code>/compact</code> command</strong>.</p>
+
+                        <div class="highlight blue" style="margin-top: 24px;">
+                            <h4>Automated Convenience, Manual Control</h4>
+                            <p>While Claude will automatically compact the session when it gets too full (around 95%
+                                capacity), skilled users trigger this manually after completing a major task. This
+                                creates a concise summary of the session so far, <em>framed as a handoff to another
+                                    developer</em>.</p>
+                            <p style="margin-top: 16px;">This proactively "saves game" at a clean break point, ensuring
+                                the AI focuses only on what matters for the next task instead of drowning in the noise
+                                of previous attempts.</p>
+                        </div>
+
+                        <div class="pills" style="margin-top: 24px;">
+                            <span class="pill">Preserves Momentum</span>
+                            <span class="pill">Maintains Context</span>
+                            <span class="pill">Avoids Full Reset</span>
+                        </div>
+
+                        <p style="margin-top: 24px;"><strong>This is a game-changer for complex tasks</strong>. It
+                            preserves institutional knowledge within the session while keeping the context fresh and
+                            fast.</p>
+
+                        <div class="code" style="margin-top: 20px;">/compact</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="--delay: 4">
             <h2>🎯 Working with <em>Code</em></h2>
-            
+
             <div class="highlight">
                 <h3>For Complex Changes</h3>
-                <p>If you're planning a <strong>major change</strong>, such as large-scale refactoring or adding complex new functionality, always instruct Claude Code to outline a plan before implementing any changes. Encourage deeper thinking by using phrases such as:</p>
+                <p>If you're planning a <strong>major change</strong>, such as large-scale refactoring or adding complex
+                    new functionality, always instruct Claude Code to outline a plan before implementing any changes.
+                    Encourage deeper thinking by using phrases such as:</p>
                 <div class="pills">
                     <span class="pill">Think hard</span>
                     <span class="pill">Think deep</span>
                     <span class="pill">Think longer</span>
                 </div>
-                <p style="margin-top: 24px;">After reviewing Claude's proposed plan, if you agree, proceed directly with the changes. If not, request revisions to the plan.</p>
+                <p style="margin-top: 24px;">After reviewing Claude's proposed plan, if you agree, proceed directly with
+                    the changes. If not, request revisions to the plan.</p>
             </div>
 
             <div class="highlight blue">
                 <h3>For Smaller Changes</h3>
-                <p>For smaller changes, such as <em>simple, single-file updates</em> or straightforward features, clearly specify the exact file you want to modify. For example:</p>
+                <p>For smaller changes, such as <em>simple, single-file updates</em> or straightforward features,
+                    clearly specify the exact file you want to modify. For example:</p>
                 <div class="code">Claude, can you increase the size of the chat input in the file "user/page.tsx"?</div>
                 <div class="code">Claude, can you add error handling to "data_processing.py"?</div>
                 <div class="code">Claude, please refactor the `calculate_totals` function in "invoice.py"</div>
@@ -732,27 +965,33 @@
                 <span class="tag">Best Practices</span>
                 <h3>Other Best Practices</h3>
                 <ul>
-                    <li>Regularly use the <strong>/compact</strong> command during development. This helps Claude Code remain efficient and reduces the risk of confusion in long-term projects.</li>
-                    <li>Always be <strong>explicit about which files</strong> you intend to change and clearly state their relationships to other components.</li>
-                    <li>Frequently run tests. Claude Code excels at validating new functionality through thorough testing, ensuring reliability and accuracy.</li>
-                    <li>Periodically ask Claude Code to <em>review the entire project</em>, assessing logic consistency and identifying any redundant or inefficient code.</li>
+                    <li>Regularly use the <strong>/compact</strong> command during development. This helps Claude Code
+                        remain efficient and reduces the risk of confusion in long-term projects.</li>
+                    <li>Always be <strong>explicit about which files</strong> you intend to change and clearly state
+                        their relationships to other components.</li>
+                    <li>Frequently run tests. Claude Code excels at validating new functionality through thorough
+                        testing, ensuring reliability and accuracy.</li>
+                    <li>Periodically ask Claude Code to <em>review the entire project</em>, assessing logic consistency
+                        and identifying any redundant or inefficient code.</li>
                 </ul>
             </div>
         </section>
 
         <section style="--delay: 3">
             <h2>💡 Advanced <em>Prompting</em> Techniques</h2>
-            
+
             <div class="tip-box">
                 <div class="tip-number">1.</div>
                 <div class="tip-title">Be Painfully Specific</div>
                 <div class="tip-description">Say exactly what you want (format, tone, length, audience).</div>
-                
+
                 <div class="example-box">
                     <div class="example-label">✓ Good Prompt:</div>
-                    <div class="example-text">"Write a 300-word blog post for tech-savvy millennials in a casual, humorous tone about the benefits of mechanical keyboards, using bullet points for key features."</div>
+                    <div class="example-text">"Write a 300-word blog post for tech-savvy millennials in a casual,
+                        humorous tone about the benefits of mechanical keyboards, using bullet points for key features."
+                    </div>
                 </div>
-                
+
                 <div class="example-box bad-example">
                     <div class="example-label">✗ Bad Prompt:</div>
                     <div class="example-text">"Write something about keyboards."</div>
@@ -763,12 +1002,13 @@
                 <div class="tip-number">2.</div>
                 <div class="tip-title">Tell It Why You Want It</div>
                 <div class="tip-description">A one-line reason improves results fast.</div>
-                
+
                 <div class="example-box">
                     <div class="example-label">✓ Good Prompt:</div>
-                    <div class="example-text">"Summarize this legal document. This is for a non-lawyer executive to understand the key risks."</div>
+                    <div class="example-text">"Summarize this legal document. This is for a non-lawyer executive to
+                        understand the key risks."</div>
                 </div>
-                
+
                 <div class="example-box bad-example">
                     <div class="example-label">✗ Bad Prompt:</div>
                     <div class="example-text">"Summarize this legal document."</div>
@@ -779,12 +1019,13 @@
                 <div class="tip-number">3.</div>
                 <div class="tip-title">Your Examples Are The Truth</div>
                 <div class="tip-description">If you show a sample, Claude copies it.</div>
-                
+
                 <div class="example-box">
                     <div class="example-label">✓ Good Example:</div>
-                    <div class="example-text">"Here is a well-formatted customer service response. [Sample] Now write a response to this new query in the same style."</div>
+                    <div class="example-text">"Here is a well-formatted customer service response. [Sample] Now write a
+                        response to this new query in the same style."</div>
                 </div>
-                
+
                 <div class="example-box bad-example">
                     <div class="example-label">✗ Bad Example:</div>
                     <div class="example-text">"Write a response like this one: [A poorly written, rude email]."</div>
@@ -795,12 +1036,13 @@
                 <div class="tip-number">4.</div>
                 <div class="tip-title">Big Projects? Work in Small Checkpoints</div>
                 <div class="tip-description">Force "step-by-step progress," not "do everything at once."</div>
-                
+
                 <div class="example-box">
                     <div class="example-label">✓ Good Strategy:</div>
-                    <div class="example-text">"First, outline the main sections of the report. [Claude provides outline]. Now, write the introduction based on that outline."</div>
+                    <div class="example-text">"First, outline the main sections of the report. [Claude provides
+                        outline]. Now, write the introduction based on that outline."</div>
                 </div>
-                
+
                 <div class="example-box bad-example">
                     <div class="example-label">✗ Bad Strategy:</div>
                     <div class="example-text">"Write a complete 50-page report on climate change."</div>
@@ -811,12 +1053,13 @@
                 <div class="tip-number">5.</div>
                 <div class="tip-title">If You Use an Agent Workflow, Say So</div>
                 <div class="tip-description">Tell it whether context will be compacted / saved to files.</div>
-                
+
                 <div class="example-box">
                     <div class="example-label">✓ Good Prompt:</div>
-                    <div class="example-text">"You are an agent in a multi-turn workflow. At the end of each turn, summarize your progress and save the current state to a file named 'state.json'."</div>
+                    <div class="example-text">"You are an agent in a multi-turn workflow. At the end of each turn,
+                        summarize your progress and save the current state to a file named 'state.json'."</div>
                 </div>
-                
+
                 <div class="example-box bad-example">
                     <div class="example-label">✗ Bad Prompt:</div>
                     <div class="example-text">"Just do the task."</div>
@@ -827,12 +1070,13 @@
                 <div class="tip-number">6.</div>
                 <div class="tip-title">Want Action, Not Advice? Say "Do It"</div>
                 <div class="tip-description">If you want edits/implementation, explicitly request that behavior.</div>
-                
+
                 <div class="example-box">
                     <div class="example-label">✓ Good Prompt:</div>
-                    <div class="example-text">"Here is some code. Refactor it to improve performance and readability. Return only the refactored code."</div>
+                    <div class="example-text">"Here is some code. Refactor it to improve performance and readability.
+                        Return only the refactored code."</div>
                 </div>
-                
+
                 <div class="example-box bad-example">
                     <div class="example-label">✗ Bad Prompt:</div>
                     <div class="example-text">"What do you think of this code?"</div>
@@ -842,13 +1086,15 @@
             <div class="tip-box">
                 <div class="tip-number">7.</div>
                 <div class="tip-title">Control Formatting by Saying What to Do</div>
-                <div class="tip-description">Instead of "don't use markdown," say "write 3 short paragraphs" or "return JSON."</div>
-                
+                <div class="tip-description">Instead of "don't use markdown," say "write 3 short paragraphs" or "return
+                    JSON."</div>
+
                 <div class="example-box">
                     <div class="example-label">✓ Good Prompt:</div>
-                    <div class="example-text">"Output the final answer as a JSON object with keys 'summary' and 'key_points'."</div>
+                    <div class="example-text">"Output the final answer as a JSON object with keys 'summary' and
+                        'key_points'."</div>
                 </div>
-                
+
                 <div class="example-box bad-example">
                     <div class="example-label">✗ Bad Prompt:</div>
                     <div class="example-text">"Don't use any special formatting or markdown."</div>
@@ -858,13 +1104,15 @@
             <div class="tip-box">
                 <div class="tip-number">8.</div>
                 <div class="tip-title">Use Simple "Labels" (XML tags) to Steer Behavior</div>
-                <div class="tip-description">Recommend lightweight tags to set defaults like "be proactive" vs "be cautious."</div>
-                
+                <div class="tip-description">Recommend lightweight tags to set defaults like "be proactive" vs "be
+                    cautious."</div>
+
                 <div class="example-box">
                     <div class="example-label">✓ Good Prompt:</div>
-                    <div class="example-text">"You are a helpful assistant. &lt;persona&gt;Be proactive and offer suggestions beyond the user's direct request.&lt;/persona&gt;"</div>
+                    <div class="example-text">"You are a helpful assistant. &lt;persona&gt;Be proactive and offer
+                        suggestions beyond the user's direct request.&lt;/persona&gt;"</div>
                 </div>
-                
+
                 <div class="example-box bad-example">
                     <div class="example-label">✗ Bad Prompt:</div>
                     <div class="example-text">"Be proactive."</div>
@@ -873,90 +1121,387 @@
 
             <div class="tip-box">
                 <div class="tip-number">9.</div>
-                <div class="tip-title">If 'Thinking' Is Off, Avoid the Word 'Think'</div>
-                <div class="tip-description">Claude models can be weirdly sensitive to "think"—use "consider / evaluate" instead.</div>
-                
+                <div class="tip-title">Encourage "Chain of Thought"</div>
+                <div class="tip-description">For complex logic, explicitly ask Claude to plan before executing.</div>
+
                 <div class="example-box">
                     <div class="example-label">✓ Good Prompt:</div>
-                    <div class="example-text">"Before answering, please consider the user's request and evaluate the best approach."</div>
+                    <div class="example-text">"Before writing the code, outline your step-by-step reasoning and
+                        potential edge cases."</div>
                 </div>
-                
+
                 <div class="example-box bad-example">
                     <div class="example-label">✗ Bad Prompt:</div>
-                    <div class="example-text">"Think about the user's request before answering."</div>
-                </div>
-            </div>
-        </section>
-
-        <section style="--delay: 4">
-            <h2>⚡ Essential <em>Claude</em> Features</h2>
-            
-            <div class="grid">
-                <div class="feature">
-                    <div class="icon">📚</div>
-                    <div class="feature-title">Skills System</div>
-                    <div class="feature-text">Specialized knowledge folders (docx, pptx, xlsx, pdf, frontend-design) that dramatically improve output quality. Let Claude read relevant SKILL.md files before creating documents for professional-grade results.</div>
-                </div>
-
-                <div class="feature">
-                    <div class="icon">🔍</div>
-                    <div class="feature-title">Web Search & Tools</div>
-                    <div class="feature-text">Claude can search the web, fetch URLs, access Google Drive, and use integrated tools for research and current information. Essential for staying up-to-date and accessing your company resources.</div>
-                </div>
-
-                <div class="feature">
-                    <div class="icon">🧠</div>
-                    <div class="feature-title">Memory System</div>
-                    <div class="feature-text">Claude remembers context from past conversations, making every interaction feel informed by shared history. Your ongoing projects benefit from continuity across sessions.</div>
-                </div>
-
-                <div class="feature">
-                    <div class="icon">📄</div>
-                    <div class="feature-title">File Creation</div>
-                    <div class="feature-text">Create actual files—presentations, documents, spreadsheets, PDFs—not just content previews. Claude generates professional deliverables you can immediately download or share.</div>
-                </div>
-
-                <div class="feature">
-                    <div class="icon">🎯</div>
-                    <div class="feature-title">Strategic Planning</div>
-                    <div class="feature-text">For complex multi-tool tasks, Claude develops comprehensive research plans before executing. Particularly valuable for transformation work requiring multiple data sources.</div>
-                </div>
-
-                <div class="feature">
-                    <div class="icon">💾</div>
-                    <div class="feature-title">200K Context Window</div>
-                    <div class="feature-text">With a 200K token context window, Claude can handle entire codebases, multiple documents, or extensive conversations without losing context.</div>
+                    <div class="example-text">"Just fix the bug immediately."</div>
                 </div>
             </div>
         </section>
 
         <section style="--delay: 5">
-            <h2>✨ Best <em>Practices</em></h2>
-            
-            <div class="card">
-                <span class="tag">Leverage Skills</span>
-                <h3>Read Skills Before Creating</h3>
-                <p>Before creating documents, presentations, or complex interfaces, <strong>explicitly ask Claude to read the relevant skill documentation</strong>. This ensures you get the highest quality, most professional outputs.</p>
-                <div class="code">Please read the pptx skill, then create a presentation about our Q3 results</div>
-                <div class="code">Read the docx skill and create a project proposal</div>
-            </div>
+            <h2>🌍 Real-World Use Cases</h2>
+            <p style="font-size: 18px; color: var(--charcoal); margin-bottom: 40px;">Discover how Claude can transform
+                your workflow across different domains</p>
 
-            <div class="card">
-                <span class="tag">Organization</span>
-                <h3>Use Projects for Context</h3>
-                <p>For ongoing work, use <em>Claude Projects</em> to maintain context, custom instructions, and relevant files. This creates a dedicated workspace with persistent memory and knowledge.</p>
+            <div class="grid">
+                <div class="feature">
+                    <div class="icon">✍️</div>
+                    <div class="feature-title">Creative Writing</div>
+                    <div class="feature-text">
+                        <strong>Develop unique voices</strong> for different audiences, improve your writing style with
+                        personalized feedback, and brainstorm creative ideas with an AI partner that understands context
+                        and nuance.
+                    </div>
+                    <div class="example-box" style="margin-top: 16px;">
+                        <div style="font-size: 13px; color: var(--charcoal);">"Help me develop a unique voice for
+                            tech-savvy millennials interested in sustainability"</div>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="icon">🧠</div>
+                    <div class="feature-title">Learning & Understanding</div>
+                    <div class="feature-text">
+                        <strong>Explain complex topics</strong> in simple terms, make sense of interconnected ideas, and
+                        prepare for exams or interviews with personalized study plans and practice questions.
+                    </div>
+                    <div class="example-box" style="margin-top: 16px;">
+                        <div style="font-size: 13px; color: var(--charcoal);">"Explain quantum computing to me like I'm
+                            a software engineer with no physics background"</div>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="icon">💻</div>
+                    <div class="feature-title">Code Development</div>
+                    <div class="feature-text">
+                        <strong>Explain programming concepts</strong>, get detailed code reviews with actionable tips,
+                        and engage in collaborative coding sessions where Claude acts as your pair programming partner.
+                    </div>
+                    <div class="example-box" style="margin-top: 16px;">
+                        <div style="font-size: 13px; color: var(--charcoal);">"Review my React component and suggest
+                            performance optimizations"</div>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="icon">📊</div>
+                    <div class="feature-title">Data Analysis</div>
+                    <div class="feature-text">
+                        Transform raw data into insights, create visualizations, analyze trends, and generate
+                        comprehensive reports with findings and recommendations.
+                    </div>
+                    <div class="example-box" style="margin-top: 16px;">
+                        <div style="font-size: 13px; color: var(--charcoal);">"Analyze this sales data and identify
+                            seasonal trends"</div>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="icon">🔬</div>
+                    <div class="feature-title">Research & Synthesis</div>
+                    <div class="feature-text">
+                        Conduct comprehensive research across multiple sources, synthesize findings into coherent
+                        summaries, and stay current with the latest developments in your field.
+                    </div>
+                    <div class="example-box" style="margin-top: 16px;">
+                        <div style="font-size: 13px; color: var(--charcoal);">"Research the latest trends in AI safety
+                            and create a summary for executives"</div>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="icon">⚙️</div>
+                    <div class="feature-title">Process Automation</div>
+                    <div class="feature-text">
+                        Automate repetitive tasks, create scripts and workflows, integrate different tools and services,
+                        and optimize your development pipeline.
+                    </div>
+                    <div class="example-box" style="margin-top: 16px;">
+                        <div style="font-size: 13px; color: var(--charcoal);">"Create a bash script to automate our
+                            deployment process"</div>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section style="--delay: 6">
+            <h2>⚡ Essential <em>Claude</em> Features</h2>
+
+            <div class="grid">
+                <div class="feature">
+                    <div class="icon">📚</div>
+                    <div class="feature-title">Smart Artifacts</div>
+                    <div class="feature-text">Specialized knowledge folders (docx, pptx, xlsx, pdf, frontend-design)
+                        that dramatically improve output quality. Let Claude read relevant SKILL.md files before
+                        creating documents for professional-grade results.</div>
+                </div>
+
+                <div class="feature">
+                    <div class="icon">🔍</div>
+                    <div class="feature-title">Web Search & Tools</div>
+                    <div class="feature-text">Claude can search the web, fetch URLs, access Google Drive, and use
+                        integrated tools for research and current information. Essential for staying up-to-date and
+                        accessing your company resources.</div>
+                </div>
+
+                <div class="feature">
+                    <div class="icon">🧠</div>
+                    <div class="feature-title">Memory System</div>
+                    <div class="feature-text">Claude remembers context from past conversations, making every interaction
+                        feel informed by shared history. Your ongoing projects benefit from continuity across sessions.
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="icon">📄</div>
+                    <div class="feature-title">File Creation</div>
+                    <div class="feature-text">Create actual files—presentations, documents, spreadsheets, PDFs—not just
+                        content previews. Claude generates professional deliverables you can immediately download or
+                        share.</div>
+                </div>
+
+                <div class="feature">
+                    <div class="icon">🎯</div>
+                    <div class="feature-title">Strategic Planning</div>
+                    <div class="feature-text">For complex multi-tool tasks, Claude develops comprehensive research plans
+                        before executing. Particularly valuable for transformation work requiring multiple data sources.
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="icon">💾</div>
+                    <div class="feature-title">200K Context Window</div>
+                    <div class="feature-text">With a 200K token context window, Claude can handle entire codebases,
+                        multiple documents, or extensive conversations without losing context.</div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Removed redundant Best Practices section -->
+
+        <section style="--delay: 7">
+            <h2>⚙️ Engineering Pro-Tips</h2>
+            <p style="font-size: 18px; color: var(--charcoal); margin-bottom: 40px;">Advanced techniques used by
+                Anthropic's own engineering team</p>
+
+            <div class="grid">
+                <div class="card" style="margin-bottom: 0;">
+                    <span class="tag">Workflow</span>
+                    <h3>Multi-Claude Approach</h3>
+                    <p>Don't just use one agent. Anthropic engineers often run <strong>multiple Claude
+                            instances</strong> simultaneously.</p>
+                    <ul style="margin-top: 16px;">
+                        <li><strong>Coder & Reviewer:</strong> Have one terminal open where Claude writes code. Open a
+                            second terminal to have another Claude <em>review</em> that code.</li>
+                        <li><strong>Git Worktrees:</strong> Use <code>git worktree</code> to check out multiple branches
+                            in different folders. Run a separate Claude in each to work on independent features in
+                            parallel.</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-bottom: 0;">
+                    <span class="tag">Methodology</span>
+                    <h3>The TDD Power-Loop</h3>
+                    <p>Test-Driven Development is supercharged with agents. Be explicit about the steps:</p>
+                    <ol style="margin-left: 20px; line-height: 1.8; color: var(--charcoal); margin-top: 16px;">
+                        <li>"Write a test for Feature X. Do not implement it yet."</li>
+                        <li>"Run the test and confirm it fails."</li>
+                        <li>"Now write the code to pass the test."</li>
+                        <li>"Run the test again to verify."</li>
+                    </ol>
+                    <p style="margin-top: 16px;">This prevents "hallucinated success" and keeps the agent grounded in
+                        reality.</p>
+                </div>
+            </div>
+
+            <div class="highlight blue" style="margin-top: 24px;">
+                <h3>⚡ Automation: Custom Slash Commands</h3>
+                <p>Did you know you can create your own commands? Create markdown files in a
+                    <code>.claude/commands</code> folder to define reusable workflows.
+                </p>
+                <div class="code">
+                    # .claude/commands/fix-issue.md<br>
+                    Please analyze and fix the GitHub issue: $ARGUMENTS.<br>
+                    1. Use `gh issue view`...<br>
+                    2. Search codebase...<br>
+                    3. Fix and test...
+                </div>
+                <p style="margin-top: 16px;">Now you can just type <code>/project:fix-issue 123</code> to trigger a
+                    complex, multi-step engineering protocol.</p>
+            </div>
+
+            <div class="card"
+                style="margin-top: 24px; background: linear-gradient(135deg, rgba(44, 36, 32, 0.03), rgba(212, 114, 94, 0.03));">
+                <span class="tag">Advanced Control</span>
+                <h3>Hyper-Control with Hooks</h3>
+                <p>For ultimate control, define <strong>Hooks</strong>—scripts that run at specific lifecycle events
+                    (like <code>PreToolUse</code>) to block actions or enforce safety.</p>
+                <div class="code" style="font-size: 13px;">
+                    # .claude/hooks/pre-tool-use.sh<br>
+                    if [[ "$TOOL_NAME" == "bash" && "$TOOL_INPUT" == *"rm -rf"* ]]; then<br>
+                    &nbsp;&nbsp;echo "⚠️ Blocked dangerous deletion"<br>
+                    &nbsp;&nbsp;exit 1<br>
+                    fi
+                </div>
+            </div>
+        </section>
+
+        <section style="--delay: 8">
+            <h2>🤖 Scale Yourself: Subagents & MCP</h2>
+            <p style="font-size: 18px; color: var(--charcoal); margin-bottom: 40px;">Stop trying to do everything in one
+                context window. <strong>Delegate.</strong></p>
+
+            <div class="grid">
+                <div class="card" style="margin-bottom: 0;">
+                    <span class="tag">Architecture</span>
+                    <h3>The Mental Model</h3>
+                    <p>Think of <strong>MCP</strong> (Model Context Protocol) as giving Claude <em>hands</em> (tools to
+                        touch your data), and <strong>Subagents</strong> as giving it <em>staff</em>.</p>
+                    <p style="margin-top: 16px;">Instead of one giant prompt, create specialized agents—like a "QA
+                        Tester" or "Docs Writer"—that have their own <strong>isolated memory</strong> to prevent context
+                        pollution.</p>
+                </div>
+
+                <div class="card" style="margin-bottom: 0;">
+                    <span class="tag">How-To</span>
+                    <h3>Creating Subagents</h3>
+                    <p>Two ways to spawn your team:</p>
+                    <ul style="margin-top: 16px;">
+                        <li><strong>Interactive:</strong> Type <code>/agents</code> in the CLI and let Claude interview
+                            you to design the perfect specialist.</li>
+                        <li><strong>Declarative:</strong> Create a markdown file in
+                            <code>.claude/agents/my-agent.md</code> to version-control your team.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight blue" style="margin-top: 24px;">
+                <h3>The Killer Combo: Subagents + MCP</h3>
+                <p>Combine them for secure, powerful workflows. A subagent can be restricted to <em>only</em> use
+                    specific MCP tools.</p>
+                <div class="code">
+                    # .claude/agents/database-admin.md<br>
+                    description: A cautious database specialist<br>
+                    tools: ["postgres-mcp", "read-only"]<br><br>
+                    You are a DBA. You verify every SQL query twice. You NEVER run DELETE without explicit confirmation.
+                </div>
+                <p style="margin-top: 16px;">This agent can't accidentally edit your frontend code—it doesn't even have
+                    the tools to see it.</p>
+            </div>
+        </section>
+
+        <section style="--delay: 9">
+            <h2>📚 Learning Resources & Next Steps</h2>
+            <p style="font-size: 18px; color: var(--charcoal); margin-bottom: 40px;">Continue your journey with official
+                Anthropic resources and courses</p>
+
+            <div class="card">
+                <span class="tag">Anthropic Academy</span>
+                <h3>Official Training Courses</h3>
+                <p>Get in the know with comprehensive Anthropic resources. From API development guides to enterprise
+                    deployment best practices, the academy has you covered with <strong>certificate programs</strong>
+                    upon completion.</p>
+
+                <div class="grid" style="margin-top: 32px;">
+                    <div
+                        style="background: linear-gradient(135deg, rgba(212, 114, 94, 0.08), rgba(232, 174, 159, 0.05)); padding: 24px; border-radius: 12px; border: 1px solid rgba(212, 114, 94, 0.15);">
+                        <h4 style="margin-bottom: 8px;">🎓 Claude Code in Action</h4>
+                        <p style="font-size: 15px; line-height: 1.6; margin-bottom: 16px;">Master
+                            <strong>Hooks</strong>, the <strong>SDK</strong>, and GitHub workflows to build robust,
+                            automated agentic pipelines.
+                        </p>
+                        <a href="https://anthropic.skilljar.com/claude-code-in-action" target="_blank"
+                            style="display: inline-block; background: var(--primary); color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s;">Start
+                            Course →</a>
+                    </div>
+
+                    <div
+                        style="background: linear-gradient(135deg, rgba(212, 114, 94, 0.08), rgba(232, 174, 159, 0.05)); padding: 24px; border-radius: 12px; border: 1px solid rgba(212, 114, 94, 0.15);">
+                        <h4 style="margin-bottom: 8px;">📖 Claude 101</h4>
+                        <p style="font-size: 15px; line-height: 1.6; margin-bottom: 16px;">The foundations:
+                            <strong>Projects</strong> to organize work, <strong>Skills</strong> for capabilities, and
+                            <strong>Artifacts</strong> for content creation.
+                        </p>
+                        <a href="https://anthropic.skilljar.com/claude-101" target="_blank"
+                            style="display: inline-block; background: var(--primary); color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s;">Start
+                            Course →</a>
+                    </div>
+
+                    <div
+                        style="background: linear-gradient(135deg, rgba(212, 114, 94, 0.08), rgba(232, 174, 159, 0.05)); padding: 24px; border-radius: 12px; border: 1px solid rgba(212, 114, 94, 0.15);">
+                        <h4 style="margin-bottom: 8px;">🔌 Intro to MCP</h4>
+                        <p style="font-size: 15px; line-height: 1.6; margin-bottom: 16px;">Learn the 3 core primitives:
+                            <strong>Tools</strong>, <strong>Resources</strong>, and <strong>Prompts</strong> to connect
+                            Claude to any external system.
+                        </p>
+                        <a href="https://anthropic.skilljar.com/introduction-to-model-context-protocol" target="_blank"
+                            style="display: inline-block; background: var(--primary); color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s;">Start
+                            Course →</a>
+                    </div>
+
+                    <div
+                        style="background: linear-gradient(135deg, rgba(212, 114, 94, 0.08), rgba(232, 174, 159, 0.05)); padding: 24px; border-radius: 12px; border: 1px solid rgba(212, 114, 94, 0.15);">
+                        <h4 style="margin-bottom: 8px;">🚀 MCP Advanced Topics</h4>
+                        <p style="font-size: 15px; line-height: 1.6; margin-bottom: 16px;">Go deeper with
+                            <strong>Sampling</strong> for agentic loops, <strong>Notifications</strong> for real-time
+                            updates, and <strong>Filesystem Roots</strong>.
+                        </p>
+                        <a href="https://anthropic.skilljar.com/model-context-protocol-advanced-topics" target="_blank"
+                            style="display: inline-block; background: var(--primary); color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s;">Start
+                            Course →</a>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 24px;">
+                    <a href="https://anthropic.skilljar.com/" target="_blank"
+                        style="color: var(--primary); font-weight: 600; text-decoration: none; font-size: 16px;">View
+                        All Courses →</a>
+                </div>
+            </div>
+
+            <div class="highlight" style="margin-top: 32px;">
+                <h3>Three Learning Paths</h3>
+                <div style="margin-top: 24px;">
+                    <div style="margin-bottom: 24px;">
+                        <h4>🔧 Build with Claude</h4>
+                        <p>Start developing Claude-powered applications with comprehensive API guides and best practices
+                            for integration.</p>
+                        <a href="https://www.anthropic.com/learn/build-with-claude" target="_blank"
+                            style="color: var(--primary); font-weight: 500; text-decoration: none;">Learn more →</a>
+                    </div>
+
+                    <div style="margin-bottom: 24px;">
+                        <h4>🏢 Claude for Work</h4>
+                        <p>Learn to implement Claude across your organization and maximize team productivity with
+                            enterprise best practices.</p>
+                        <a href="https://www.anthropic.com/learn/claude-for-work" target="_blank"
+                            style="color: var(--primary); font-weight: 500; text-decoration: none;">Learn more →</a>
+                    </div>
+
+                    <div>
+                        <h4>👤 Claude for Personal</h4>
+                        <p>Discover how to leverage Claude's capabilities for your individual projects and daily tasks.
+                        </p>
+                        <a href="https://www.anthropic.com/learn/claude-for-you" target="_blank"
+                            style="color: var(--primary); font-weight: 500; text-decoration: none;">Learn more →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="--delay: 10">
             <h2>🎨 Getting the Best <em>Output</em></h2>
-            
+
             <div class="highlight">
                 <h3>For Documents & Presentations</h3>
                 <p>When creating professional documents, <strong>always reference the skills system:</strong></p>
                 <div class="code">"Read the docx skill and create a project proposal"</div>
                 <div class="code">"Use the pptx skill to make a 10-slide investor deck"</div>
-                <p style="margin-top: 24px;">This ensures Claude uses battle-tested best practices for formatting, structure, and visual design.</p>
+                <p style="margin-top: 24px;">This ensures Claude uses battle-tested best practices for formatting,
+                    structure, and visual design.</p>
             </div>
 
             <div class="highlight blue">
@@ -971,11 +1516,46 @@
             </div>
         </section>
 
+        <section style="--delay: 11">
+            <h2>🚀 Conclusion: A New Kind of Collaboration</h2>
+
+            <div class="highlight">
+                <p style="font-size: 18px; line-height: 1.8;">These insights paint a clear picture: <strong>Claude Code
+                        is designed to be less of a code-writing bot and more of a collaborative partner</strong>. It's
+                    an assistant that learns on the fly like a human, possesses deep expertise in the command line, and
+                    can act as a strategic partner in planning, not just execution.</p>
+
+                <p style="font-size: 18px; line-height: 1.8; margin-top: 24px;">By understanding these core principles,
+                    we can move beyond simply asking it to "write a function" and start leveraging it as a <em>true
+                        engineering sidekick</em>.</p>
+
+                <div
+                    style="background: linear-gradient(135deg, rgba(155, 107, 92, 0.08), rgba(212, 114, 94, 0.05)); padding: 28px; border-radius: 12px; margin-top: 32px; border-left: 4px solid var(--accent);">
+                    <p style="font-size: 17px; font-style: italic; color: var(--dark); line-height: 1.8;">"As AI tools
+                        increasingly mimic the discovery and collaboration patterns of human experts, how might this
+                        change not just what we build, but <strong>how we think about building it</strong>?"</p>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    <p style="font-size: 16px; color: var(--charcoal); margin-bottom: 16px;">Ready to transform your
+                        development workflow?</p>
+                    <a href="https://claude.ai/" target="_blank"
+                        style="display: inline-block; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 16px; box-shadow: 0 4px 16px rgba(212, 114, 94, 0.3); transition: all 0.3s;">Get
+                        Started with Claude →</a>
+                </div>
+            </div>
+        </section>
+
         <footer>
-            <p class="footer-text">This guide reflects Claude's capabilities as of December 2025</p>
-            <p class="footer-brand">Made with Claude Sonnet 4.5 by <strong>Simone Leonelli</strong></p>
-            <p class="footer-text"><a href="https://www.linkedin.com/in/simoleonelli/" style="color: var(--primary); text-decoration: none;">LinkedIn</a> • <a href="https://w230.net" style="color: var(--primary); text-decoration: none;">w230.net</a> • <a href="https://github.com/MustBeSimo" style="color: var(--primary); text-decoration: none;">@mustbesimo</a></p>
+            <p class="footer-text">This guide reflects Claude's capabilities as of January 2026</p>
+            <p class="footer-brand">Made with Claude 4.5 by <strong>Simone Leonelli</strong></p>
+            <p class="footer-text"><a href="https://www.linkedin.com/in/simoleonelli/"
+                    style="color: var(--primary); text-decoration: none;">LinkedIn</a> • <a href="https://w230.net"
+                    style="color: var(--primary); text-decoration: none;">w230.net</a> • <a
+                    href="https://x.com/mustbesimo"
+                    style="color: var(--primary); text-decoration: none;">@mustbesimo</a></p>
         </footer>
     </div>
 </body>
+
 </html>
