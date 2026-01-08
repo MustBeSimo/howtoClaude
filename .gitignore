@@ -1,2 +1,6 @@
 OLD/
 .DS_Store
+scripts/
+TODO.md
+progress.md
+tests.json
